@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  emlrender:
+    build: .
+    image: emlrender
+    restart: always
+    hostname: emlrender
+    container_name: emlrender
+    ports:
+      - '443:443'
+    network_mode: bridge
