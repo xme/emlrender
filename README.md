@@ -16,6 +16,7 @@ $ git clone https://github.com/xme/emlrender
 $ cd emlrender
 $ docker build -t emlrender:latest .
 ```
+An image is ready to use on hub.docker.com: [https://hub.docker.com/r/rootshell/emlrender/](https://hub.docker.com/r/rootshell/emlrender/)
 
 ### Starting the container
 EMLRender is a stand-alone container that does not have any dependency.
