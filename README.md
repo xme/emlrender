@@ -1,6 +1,6 @@
 # EMLRender
 ## Introduction
-Sometimes, while investigating incident that imply emails, you can get a copy of the original message in [EML](http://www.forensicswiki.org/wiki/EML) format. Reading an EML file is not easy with all the SMTP headers and the mulitple MIME parts it may contain. But it may also contain suspicious code that is dangerous to be executed from sensitive environments. EMLRender is a Python script that provides a REST API to render submitted EML files into PNG images. This way, it's easy to have a clear overview of the mail content.
+Sometimes, while investigating incident implying emails, you can get a copy of the original message in [EML](http://www.forensicswiki.org/wiki/EML) format. Reading an EML file is not easy with all the SMTP headers and the mulitple MIME parts it may contain. But it may also contain suspicious code that is dangerous to be executed from sensitive environments. EMLRender is a Python script that provides a REST API to render submitted EML files into PNG images. This way, it's easy to have a clear overview of the mail content.
 
 Here is a sample of generated image:
 ![alt text](https://raw.githubusercontent.com/xme/emlrender/master/sample.png "Sample image")
@@ -22,8 +22,10 @@ EMLRender is a stand-alone container that does not have any dependency.
 ```
 $ docker run emlrender:latest
 ```
+Once started, it will listing to port 443. 
+Note: a self-signed certificate is generated when the container is created.
 
-## Administration
+## Setup & Configuration
 ### User database creation
 EMLRender requires user authentication to render EML files. The first action is to generate the users database and an admin account:
 ```
