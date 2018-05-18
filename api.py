@@ -409,10 +409,11 @@ class Init(Resource):
             writeLog('[ERROR] Users database already initialized')
             return Response(json.dumps([{ "message" : "The users database has already been initialized" }]), mimetype='application/json')
 
-        # Generate a random 10 characters password
-        m = hashlib.md5()
-        m.update(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8'))
-        password = m.hexdigest() 
+        request_json = request.get_json(force=True)
+        password = request_json.get('password')
+        if password is None:
+            # Generate a random 10 characters password
+            password = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8')
         
         user  = User(username = username)
         user.hash_password(password)
@@ -420,7 +421,7 @@ class Init(Resource):
         db.session.commit()
 
         writeLog('[INFO] Users database successfully initialized')
-        return Response(json.dumps([{ "message" : "Users database successfully initialized" }]), mimetype='application/json')
+        return Response(json.dumps([{ "message" : "Users database successfully initialized" }, {"password" : password}]), mimetype='application/json')
 
 class AddUser(Resource):
 
@@ -453,9 +454,7 @@ class AddUser(Resource):
 
         if password is None:
             # Generate a random 10 characters password
-            m = hashlib.md5()
-            m.update(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8'))
-            password = m.hexdigest() 
+            passsword = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8')
 
         if User.query.filter_by(username = username).first() is not None:
             writeLog('[ERROR] Users already exists: %s' % username)
@@ -506,9 +505,7 @@ class ResetPw(Resource):
 
         if newpassword is None:
             # Generate a random 10 characters password
-            m = hashlib.md5()
-            m.update(''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8'))
-            newpassword = m.hexdigest() 
+            newpassword = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(10)).encode('utf-8')
 
         if User.query.filter_by(username = username).first() is None:
             writeLog('[ERROR] Users %s do not exist: %s' % username)
