@@ -2,6 +2,9 @@
 ## Introduction
 Sometimes, while investigating incident that imply emails, you can get a copy of the original message in [EML](http://www.forensicswiki.org/wiki/EML) format. Reading an EML file is not easy with all the SMTP headers and the mulitple MIME parts it may contain. But it may also contain suspicious code that is dangerous to be executed from sensitive environments. EMLRender is a Python script that provides a REST API to render submitted EML files into PNG images. This way, it's easy to have a clear overview of the mail content.
 
+Here is a sample of generated image:
+![alt text](https://github.com/xme/emlrender/sample.png "Sample image")
+
 ## Compoments
 EMLRender is based on the [wkhtmltoimage](https://wkhtmltopdf.org/) tool to render HTML code. It consists of a single Python script that provides an HTTP interface or REST API. The best way to use it is to run it in a Docker container. This way, it can be easily deployed.
 
