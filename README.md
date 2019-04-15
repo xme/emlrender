@@ -21,7 +21,7 @@ An image is ready to use on hub.docker.com: [https://hub.docker.com/r/rootshell/
 ### Starting the container
 EMLRender is a stand-alone container that does not have any dependency.
 ```
-$ docker run emlrender:latest
+$ docker run rootshell/emlrender:latest
 ```
 Once started, it will listing to port 443. 
 Note: a self-signed certificate is generated when the container is created.
