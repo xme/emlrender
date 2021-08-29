@@ -280,13 +280,17 @@ def processEml(data):
 
     resultImage = dumpDir + '/' + 'new.png'
     if len(imagesList) > 0:
-        images = list(map(Image.open, imagesList))
-        combo = appendImages(images)
-        combo.save(resultImage)
-        # Clean up temporary images
-        for i in imagesList:
-           os.remove(i)
-        return(resultImage)
+        try:
+            images = list(map(Image.open, imagesList))
+            combo = appendImages(images)
+            combo.save(resultImage)
+        
+            return(resultImage)
+        finally:
+            # Clean up temporary images
+            for i in imagesList:
+                os.remove(i)
+        
     else:
         return(False)
 
